@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selamat Ulang Tahun!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gradient-to-br from-yellow-400 to-white-600 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full text-center">
+      <h1 class="text-4xl font-bold mb-4 text-indigo-600">Happy Birthday!!</h1>
+      <div id="birthdayBalloon" class="text-6xl mb-6 float-animation">🎈</div>
+      <p id="greetingText" class="text-xl mb-6">Semoga hari ini penuh kebahagiaan dan sukacita.</p>
+      <div class="mb-6">
+        <label for="nameInput" class="block text-sm font-medium text-gray-700 mb-2">Masukkan nama:</label>
+        <input type="text" id="nameInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      <button id="customizeButton" class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition duration-300 mb-4">Kirim</button>
+    </div>
+
+    <script>
+      const greetingText = document.getElementById("greetingText");
+      const nameInput = document.getElementById("nameInput");
+      const customizeButton = document.getElementById("customizeButton");
+      const birthdayBalloon = document.getElementById("birthdayBalloon");
+
+      customizeButton.addEventListener("click", () => {
+        const name = nameInput.value.trim();
+        if (name) {
+          greetingText.textContent = `Selamat ulang tahun, ${name}! Wish u all the best..`;
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+          });
+
+          // Change balloon emoji
+          const balloons = ["🎈", "🎊", "🎉", "🥳", "🎁"];
+          birthdayBalloon.textContent = balloons[Math.floor(Math.random() * balloons.length)];
+        }
+      });
+
+      // Easter egg: click on balloon for extra confetti
+      birthdayBalloon.addEventListener("click", () => {
+        confetti({
+          particleCount: 150,
+          spread: 180,
+          origin: { y: 0.8 },
+        });
+      });
+    </script>
+  </body>
+</html>
